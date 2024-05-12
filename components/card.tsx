@@ -35,28 +35,63 @@ export default function Card({ data, isYearly, rate, currency }: Props) {
   const isTeams = data.id === "teams";
   const price = isYearly ? data.price.valueYearly : data.price.valueMonthly;
 
+  const calculatePrice = () => {
+    let discount = isYearly ? data.price.discountYearly : data.price.discountMonthly ?? 0;
+    let tmpPrice = Number(price);
+    let discountedPrice = tmpPrice - (tmpPrice * (discount / 100))
+    return Math.round(discountedPrice * rate);
+  }
+
   return (
     <Item ispremium={isPremium}>
       {isPremium &&
-        <Badge ispremium={isPremium}>
-          Most Popular
-        </Badge>
+        <>
+          <Badge ispremium={isPremium}>
+            {isYearly ? 'Special Price' : 'Most Popular'}
+          </Badge>
+          {isYearly &&
+            <PriceDiscount>
+              {currency === 'EUR' ? '€' : '$'} {price}
+            </PriceDiscount>
+          }
+        </>
       }
       {isTeams &&
-        <Badge ispremium={isPremium}>
-          Is Special
-        </Badge>
+        <>
+          <Badge ispremium={isPremium}>
+            Special Price
+          </Badge>
+          <PriceDiscount>
+            {currency === 'EUR' ? '€' : '$'} {price}
+          </PriceDiscount>
+        </>
       }
       <DivTitle>
         <Title color={data.id} ispremium={isPremium}>{data.title}</Title>
         <SubTitle>{data.subTitle}</SubTitle>
       </DivTitle>
       <DivPrice backgroundcolor={isPremium ? 'rgb(3,239,98)' : isTeams ? 'rgb(217, 217, 225)' : '#fff'}>
-        {price === 0 ?
-          <>Free</>
-          :
-          <>{!isNaN(Number(price)) ? `${currency === 'EUR' ? '€' : '$'}` + Math.round(Number(price) * rate)  : price}</>
-        }
+        <Price ispremium={isPremium || isTeams}>
+          {price === 0 ?
+            <>Free</>
+            :
+            <>{!isNaN(Number(price)) ? `${currency === 'EUR' ? '€' : '$'}` + calculatePrice() : price}</>
+          }
+          {isPremium &&
+            <PriceConditions>
+              <span>/month</span>
+              {isYearly &&
+                <span>billed annually</span>
+              }
+            </PriceConditions>
+          }
+          {isTeams &&
+            <PriceConditions>
+              <span>per user /month</span>
+              <span>billed annually</span>
+            </PriceConditions>
+          }
+        </Price>
       </DivPrice>
       <DivButtonList>
         <Button ispremium={isPremium}>
@@ -114,7 +149,7 @@ const Item = styled.article<IsPremiumProps>`
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       margin-top: -16px;
-      z-index: 0;
+      z-index: 10;
     }
     &:nth-child(3){
       border-radius: 0;
@@ -210,6 +245,86 @@ const DivPrice = styled.div<DivPriceProps>`
     padding-top: 10px;
     padding-bottom: 10px;
     min-height: 0;
+  }
+`;
+
+const Price = styled.strong<IsPremiumProps>`
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  font-size: ${props => props.ispremium ? '2.5rem' : '1.75rem'};
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  margin: 0;
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: 700;
+  justify-content: flex-start;
+  margin-left: 0;
+  @media screen and (min-width: 992px){
+    font-size: ${props => props.ispremium ? '3.125rem' : '2rem'};
+  }
+`;
+
+const PriceConditions = styled.div`
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  margin-bottom: 4px;
+  margin-left: 8px;
+  span{
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-top: 0;
+    flex-shrink: 0;
+    font-weight: 400;
+  }
+  @media screen and (min-width: 1200px){
+    flex-direction: column;
+  }
+`;
+
+const PriceDiscount = styled.strong`
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-top: 0;
+  color: #626D79;
+  font-weight: 400;
+  padding-top: -2px;
+  padding-bottom: -2px;
+  display: inline-block;
+  margin-right: 16px;
+  margin-top: -20px;
+  margin-bottom: -20px;
+  position: absolute;
+  padding-left: 8px;
+  padding-right: 8px;
+  right: 0;
+  top: 32px;
+  &::after{
+    border-color: inherit;
+    border-top: 2.5px solid #FF5400;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 45%;
+    transform: rotate(-15.73deg);
+  }
+  @media screen and (min-width: 1200px) {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    top: 24px;
   }
 `;
 
