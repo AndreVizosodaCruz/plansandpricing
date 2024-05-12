@@ -346,7 +346,6 @@ const Button = styled.a<IsPremiumProps>`
   border-radius: 4px;
   border-style: solid;
   border-width: 2px;
-  cursor: pointer;
   display: inline-flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -372,9 +371,19 @@ const Button = styled.a<IsPremiumProps>`
   background-color: ${props => props.ispremium ? '#03EF62' : '#fff'};
   border-color: ${props => props.ispremium ? 'transparent' : 'rgba(48, 57, 105, 0.6)'};
   width: 100%;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(48, 57, 105, 0);
+    transition: background-color 125ms ease-out;
+  }
   &:hover{
     cursor: pointer;
-    &:before{
+    &::before{
       background-color: rgba(48, 57, 105, 0.1);
     }
   }
