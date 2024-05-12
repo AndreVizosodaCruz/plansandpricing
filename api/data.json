@@ -1,0 +1,112 @@
+[
+  {
+    "id": "basic",
+    "title": "Basic",
+    "subTitle": "Limited Access",
+    "price": {
+      "valueYearly": 0,
+      "valueMonthly": 0,
+      "discountYearly": 0
+    },
+    "features": [
+      {
+        "available": true,
+        "description": "Every first chapter free"
+      },
+      {
+        "available": true,
+        "description": "Free professional profile and job board access"
+      },
+      {
+        "available": false,
+        "description": "Certificates of completion and industry-leading certifications"
+      }
+    ]
+  },
+  {
+    "id": "premium",
+    "title": "Premium",
+    "subTitle": "For individuals",
+    "price": {
+      "valueYearly": 14,
+      "valueMonthly": 42,
+      "discountYearly": 20
+    },
+    "features": [
+      {
+        "available": true,
+        "description": "Access our full content library"
+      },
+      {
+        "available": true,
+        "description": "Projects, certificates and industry-leading certifications"
+      },
+      {
+        "available": true,
+        "description": "Go from zero to job ready"
+      },
+      {
+        "available": true,
+        "description": "Our top Python, SQL, Tableau, Power BI and R programs"
+      },
+      {
+        "available": true,
+        "description": "More ways to learn to code"
+      }
+    ]
+  },
+  {
+    "id": "teams",
+    "title": "Teams",
+    "subTitle": "For teams of 2 and up",
+    "price": {
+      "valueYearly": 14,
+      "valueMonthly": 14,
+      "discountYearly": 20,
+      "discountMonthly": 20
+    },
+    "features": [
+      {
+        "available": true,
+        "description": "Manage your group"
+      },
+      {
+        "available": true,
+        "description": "View learning activity and track progress"
+      },
+      {
+        "available": true,
+        "description": "License management tools"
+      }
+    ]
+  },
+  {
+    "id": "enterprise",
+    "title": "Enterprise",
+    "subTitle": "Bespoke solutions",
+    "price": {
+      "valueYearly": "Contact sales for pricing",
+      "valueMonthly": "Contact sales for pricing",
+      "discountYearly": 0,
+      "discountMonthly": 0
+    },
+    "features": [
+      {
+        "available": true,
+        "description": "Personalized and adaptive learning paths for employees"
+      },
+      {
+        "available": true,
+        "description": "Advanced analytics and reporting integrations"
+      },
+      {
+        "available": true,
+        "description": "Single Sign-On (SSO) through Okta, Auth0, Azure and more"
+      },
+      {
+        "available": true,
+        "description": "LMS/LXP integrations"
+      }
+    ]
+  }
+]
