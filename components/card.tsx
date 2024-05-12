@@ -51,7 +51,7 @@ export default function Card({ data, isYearly, rate, currency }: Props) {
           </Badge>
           {isYearly &&
             <PriceDiscount>
-              {currency === 'EUR' ? '€' : '$'} {price}
+              {currency === 'EUR' ? '€' : '$'} {Math.round(Number(price) * rate)}
             </PriceDiscount>
           }
         </>
@@ -62,7 +62,7 @@ export default function Card({ data, isYearly, rate, currency }: Props) {
             Special Price
           </Badge>
           <PriceDiscount>
-            {currency === 'EUR' ? '€' : '$'} {price}
+            {currency === 'EUR' ? '€' : '$'} {Math.round(Number(price) * rate)}
           </PriceDiscount>
         </>
       }
